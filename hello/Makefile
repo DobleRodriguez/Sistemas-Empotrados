@@ -67,7 +67,7 @@ BBMC           = $(EXTRA_TOOLS_PATH)/bin/bbmc
 # Flags
 ASFLAGS        = -gstabs -mcpu=arm7tdmi -mfpu=softfpa
 CFLAGS         = -c -g -Wall -mcpu=arm7tdmi
-LDFLAGS        = -nostartfiles -T$(LINKER_SCRIPT)
+LDFLAGS        = -nostartfiles -T $(LINKER_SCRIPT)
 
 
 #
@@ -75,7 +75,7 @@ LDFLAGS        = -nostartfiles -T$(LINKER_SCRIPT)
 #
 
 # Aplicación
-PROGNAME = hello
+PROGNAME = P03
 OBJ      = $(PROGNAME).o
 ELF      = $(PROGNAME).elf
 BIN      = $(PROGNAME).bin

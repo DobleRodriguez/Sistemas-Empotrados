@@ -10,7 +10,7 @@ SHELL = /bin/bash
 #
 
 # Ruta al BSP
-BSP_ROOT_DIR   = ../bsp
+BSP_ROOT_DIR   = ../prac_04/bsp
 
 # Directorio de la toolchain de GNU
 # Toolchain de los repositorios
@@ -55,7 +55,8 @@ AS             = $(CROSS_COMPILE)as
 CC             = $(CROSS_COMPILE)gcc
 LD             = $(CROSS_COMPILE)ld
 OBJCOPY        = $(CROSS_COMPILE)objcopy
-OPENOCD        = $(TOOLS_PATH)/bin/openocd
+#OPENOCD        = $(TOOLS_PATH)/bin/openocd
+OPENOCD		= openocd.exe
 
 # Herramientas adicionales
 

@@ -36,8 +36,15 @@ void excep_init ()
  */
 inline uint32_t excep_disable_ints ()
 {
-	/* ESTA FUNCIÓN SE DEFINIRÁ EN LA PRÁCTICA 5 */
-	return 0;
+	uint32_t if_bits;
+
+	asm volatile(	"mrs %[bits], cpsr\n\t"
+					"orr r12, %[bits], #0xC0\n\t"
+					"msr cpsr_c, r12"
+				:	[bits] "=r" (if_bits)
+				:
+				:	"r12", "cc");
+	return (if_bits >> 6) & 3;
 }
 
 /*****************************************************************************/
@@ -86,7 +93,14 @@ inline uint32_t excep_disable_fiq ()
  */
 inline void excep_restore_ints (uint32_t if_bits)
 {
-	/* ESTA FUNCIÓN SE DEFINIRÁ EN LA PRÁCTICA 5 */
+	asm volatile(	"mrs r12, cpsr\n\t"
+					"bic r12, r12, #0xC0\n\t"
+					"orr r12, r12, %[bits], LSL #6\n\t"
+					"msr cpsr_c, r12"
+				:
+				:	[bits] "r" (if_bits & 3)
+				: 	"r12", "cc");
+	return;
 }
 
 /*****************************************************************************/
@@ -128,7 +142,7 @@ inline void excep_restore_fiq (uint32_t f_bit)
  */
 inline void excep_set_handler (excep_t excep, excep_handler_t handler)
 {
-	/* ESTA FUNCIÓN SE DEFINIRÁ EN LA PRÁCTICA 5 */
+		_excep_handlers[excep] = handler;
 }
 
 /*****************************************************************************/
@@ -139,8 +153,7 @@ inline void excep_set_handler (excep_t excep, excep_handler_t handler)
  */
 inline excep_handler_t excep_get_handler (excep_t excep)
 {
-	/* ESTA FUNCIÓN SE DEFINIRÁ EN LA PRÁCTICA 5 */
-        return NULL;
+	return _excep_handlers[excep];
 }
 
 /*****************************************************************************/

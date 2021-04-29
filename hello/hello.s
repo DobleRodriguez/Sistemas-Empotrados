@@ -21,7 +21,7 @@
         .set LED_GREEN_MASK,    (1 << (45-32))
 
         @ Retardo para el parpadeo
-        .set DELAY,            0x00080000
+        .set DELAY,            0x000f0000
 
 @
 @ Punto de entrada
